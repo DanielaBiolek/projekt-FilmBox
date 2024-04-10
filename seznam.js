@@ -103,4 +103,44 @@ const filmy = [
 			'Na zámek v podhůří Krkonoš přijíždí jeho nový majitel Štěpán se svojí snoubenkou, krásnou komtesou Blankou, a mladším bratrem Adamem. Cestou kočár nešťastně srazí kolemjdoucí dívku, Adam jí pomůže a ona se do něj zamiluje. Na zámku Adam objeví starou vlašskou knihu, která by měla obsahovat cestu k pokladům. Tajemné značky vlašské knihy však nedokáže vyluštit ani národopisec Jiráček, který v kraji sbírá pověsti a nevychází z údivu nad tím, že zdejší lidé stále věří v Krakonoše. Na zámku se objeví záhadný cizinec a nabídne Štěpánovi, že jej k pokladu za určitých podmínek dovede. Výprava do hor může začít. Naplní se Liduščina láska k Adamovi? Jakou záhadu skrývá starý obraz na zámku Hůrka a co strašlivého se v horách kdysi odehrálo? A kdo je vlastně Krakonoš a jaké je jeho největší tajemství? (csfd.cz, Česká televize)',
 		premiera: '2022-12-24',
 	},
+	{
+		id: 'zivot-briana',
+		nazev: 'Monty Python - Život Briana',
+		plakat: {
+			url: 'monty-python.jpg',
+			sirka: 420,
+			vyska: 592,
+		},
+		ochutnavka: 'Kultovní a kontroverzní komedie',
+		popis:
+			'Kultovní a kontroverzní komedie Život Briana vypráví příběh Briana (Graham Chapman), který se narodil ve stejný den a na stejném místě jako Ježíš. Po sérii absurdních a vtipných okolností je pak s mesiášem zaměňován. Film Terryho Jonese, který se konstantně vysmívá všem a všemu, nechává zazářit v několika rolích každého člena skupiny Monty Python. Přináší tak pohlcující anarchistickou satiru mířenou jak na náboženství, tak na hollywoodské zobrazování všeho biblického. ',
+		premiera: '1979-17-08',
+	},
 ]
+
+
+
+const seznamFilmu = document.querySelector('#seznam-filmu')
+
+seznamFilmu.innerHTML = ''
+
+
+filmy.forEach ((film) => {
+	seznamFilmu.innerHTML += `<div class="col">
+	<div class="card">
+	   <img
+		  src="${film.plakat.url}"
+		  width="780"
+		  height="520"
+		  class="card-img-top"
+		  alt="plakát"
+	   />
+	   <div class="card-body">
+		  <h5 class="card-title">${film.nazev}</h5>
+		  <p class="card-text">${film.popis}</p>
+		  <a href="film.html#${film.id}" class="btn btn-primary">Přehrát</a>
+	   </div>
+	</div>
+ </div>`
+})
+

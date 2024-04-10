@@ -103,4 +103,123 @@ const filmy = [
 			'Na zámek v podhůří Krkonoš přijíždí jeho nový majitel Štěpán se svojí snoubenkou, krásnou komtesou Blankou, a mladším bratrem Adamem. Cestou kočár nešťastně srazí kolemjdoucí dívku, Adam jí pomůže a ona se do něj zamiluje. Na zámku Adam objeví starou vlašskou knihu, která by měla obsahovat cestu k pokladům. Tajemné značky vlašské knihy však nedokáže vyluštit ani národopisec Jiráček, který v kraji sbírá pověsti a nevychází z údivu nad tím, že zdejší lidé stále věří v Krakonoše. Na zámku se objeví záhadný cizinec a nabídne Štěpánovi, že jej k pokladu za určitých podmínek dovede. Výprava do hor může začít. Naplní se Liduščina láska k Adamovi? Jakou záhadu skrývá starý obraz na zámku Hůrka a co strašlivého se v horách kdysi odehrálo? A kdo je vlastně Krakonoš a jaké je jeho největší tajemství? (csfd.cz, Česká televize)',
 		premiera: '2022-12-24',
 	},
+	{
+		id: 'zivot-briana',
+		nazev: 'Monty Python - Život Briana',
+		plakat: {
+			url: 'monty-python.jpg',
+			sirka: 420,
+			vyska: 592,
+		},
+		ochutnavka: 'Kultovní a kontroverzní komedie',
+		popis:
+			'Kultovní a kontroverzní komedie Život Briana vypráví příběh Briana (Graham Chapman), který se narodil ve stejný den a na stejném místě jako Ježíš. Po sérii absurdních a vtipných okolností je pak s mesiášem zaměňován. Film Terryho Jonese, který se konstantně vysmívá všem a všemu, nechává zazářit v několika rolích každého člena skupiny Monty Python. Přináší tak pohlcující anarchistickou satiru mířenou jak na náboženství, tak na hollywoodské zobrazování všeho biblického. ',
+		premiera: '1979-17-08',
+	},
 ]
+
+
+
+const filmId = window.location.hash.slice(1);
+
+const selectedFilm = filmy.find ((film) => filmId === film.id) 
+
+
+const plakatFilmu = document.querySelector('#detail-filmu img')
+plakatFilmu.src = selectedFilm.plakat.url
+
+
+const nazevFilmu = document.querySelector('.card-title')
+nazevFilmu.textContent = selectedFilm.nazev
+
+const popisFilmu = document.querySelector('.card-text')
+popisFilmu.textContent = selectedFilm.popis
+
+const premiera = document.querySelector('#premiera')
+premiera.innerHTML = `Premiéra <strong>${dayjs(selectedFilm.premiera).format('D. M. YYYY')}</strong>`
+
+const dnyOdPremiery = dayjs(selectedFilm.premiera).diff(dayjs(), 'days')
+
+const dnyOdPremieryRetezec = String(dnyOdPremiery)
+
+
+if (dnyOdPremieryRetezec.includes('-')) {
+	if (dnyOdPremieryRetezec === -1) {
+		premiera.innerHTML += `, což bylo včera.`
+	} else {
+		premiera.innerHTML += `, což bylo před ${dnyOdPremieryRetezec.slice(1)} dny.`
+	}
+} else if (dnyOdPremieryRetezec === 0) {
+	premiera.innerHTML += `, což je dnes.`
+} else {
+	if (dnyOdPremieryRetezec === 1) {
+		premiera.innerHTML += `, což bude zítra.`
+	} else if (dnyOdPremieryRetezec > 1 && dnyOdPremieryRetezec < 5) {
+		premiera.innerHTML += `, což je za ${dnyOdPremieryRetezec} dny.`
+	} else {
+		premiera.innerHTML += `, což je za ${dnyOdPremieryRetezec} dní.`
+	}
+}
+
+
+const stars = document.querySelectorAll('.fa-star')
+
+
+
+const hvezdickuj = (starNumber) => {
+	stars.forEach ((star, index) => {
+		if ((index + 1) <= starNumber) {
+			star.classList.remove('far')
+			star.classList.add('fas')
+		} else {
+			star.classList.remove('fas')
+			star.classList.add('far')
+		}
+	})
+}
+
+
+stars.forEach ((star) => {star.addEventListener('click', () => {
+	let starNumber = Number(star.textContent)
+	hvezdickuj(starNumber)
+	})
+})
+
+/stars.forEach ((star) => {star.addEventListener('click', (event) => {
+	console.log(event)})})
+
+/*stars.forEach ((star) => {star.addEventListener('mouseenter', () => {
+	let starNumber = Number(star.textContent)
+	hvezdickuj(starNumber)
+	})
+})
+
+stars.forEach ((star) => {star.addEventListener('mouseleave', () => {
+	let starNumber
+	hvezdickuj(starNumber)
+	})
+})*/
+
+
+
+const form = document.querySelector('#note-form')
+
+form.addEventListener('submit', (event) => {
+	event.preventDefault()
+
+	const message = document.querySelector('#message-input')
+	const checkbox = document.querySelector('#terms-checkbox')
+
+	if (message.value === '') {
+		message.classList.add('is-invalid')
+		message.focus()
+	} else {message.classList.remove('is-invalid')}
+
+	if (!checkbox.checked) {
+		checkbox.classList.add('is-invalid')
+	} else checkbox.classList.remove('is-invalid')
+
+	if (message.value !== '' && checkbox.checked) {
+		form.innerHTML = message.value
+	}
+})
