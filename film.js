@@ -178,27 +178,26 @@ const hvezdickuj = (starNumber) => {
 	})
 }
 
+let ohvezdickuj
 
 stars.forEach ((star) => {star.addEventListener('click', () => {
 	let starNumber = Number(star.textContent)
+	ohvezdickuj = starNumber
 	hvezdickuj(starNumber)
 	})
 })
 
-/stars.forEach ((star) => {star.addEventListener('click', (event) => {
-	console.log(event)})})
 
-/*stars.forEach ((star) => {star.addEventListener('mouseenter', () => {
+stars.forEach ((star) => {star.addEventListener('mouseenter', () => {
 	let starNumber = Number(star.textContent)
 	hvezdickuj(starNumber)
 	})
 })
 
 stars.forEach ((star) => {star.addEventListener('mouseleave', () => {
-	let starNumber
-	hvezdickuj(starNumber)
+	hvezdickuj(ohvezdickuj)
 	})
-})*/
+})
 
 
 
@@ -223,3 +222,208 @@ form.addEventListener('submit', (event) => {
 		form.innerHTML = message.value
 	}
 })
+
+const prehravac = document.querySelector('#prehravac')
+const video = document.querySelector('#prehravac video')
+const playButton = document.querySelector('.play')
+const pauseButton = document.querySelector('.pause')
+
+playButton.addEventListener('click', () => {
+	video.play()
+})
+
+video.addEventListener('playing', () => {
+	prehravac.classList.add('playing')
+})
+
+pauseButton.addEventListener('click', () => {
+	video.pause() 
+})
+
+video.addEventListener('pause', () => {
+	prehravac.classList.remove('playing')
+})
+
+document.addEventListener('keydown', (event) => {
+	if ( event.code === 'Space' &&
+		event.target.tagName !== 'TEXTAREA' &&
+		event.target.tagName !== 'INPUT' &&
+		event.target.tagName !== 'BUTTON') {
+			if (video.paused) {
+				video.play()
+			} else {
+				video.pause()
+			}
+	}
+})
+
+const time = document.querySelector('.current-time')
+
+video.addEventListener('timeupdate', () => {
+	let timeVidea = Math.round(video.currentTime)
+	let minutyVidea = String(Math.floor(timeVidea / 60)).padStart(2, '0')
+	let vterinyVidea = String(Math.floor(timeVidea % 60)).padStart(2, '0')
+	time.innerHTML = `${minutyVidea}:${vterinyVidea}`
+})
+
+const ovladaceVidea = document.querySelector('.player-controls')
+
+const hideControls = () => {
+	ovladaceVidea.classList.add('hidden')}
+
+setTimeout(hideControls, 3000)
+
+const showControls = () => {
+	ovladaceVidea.classList.remove('hidden')
+	setTimeout(hideControls, 9000)
+}
+
+
+document.addEventListener ('click', showControls )
+document.addEventListener ('mousemove', showControls)
+document.addEventListener ('keydown', showControls)
+
+
+
+/*const showHello = () => {
+	document.body.innerHTML += '<p>ahoj</p>';
+  };
+  
+  const timerId = setTimeout(showHello, 5000);
+  
+  const dismissTimer = () => {
+	clearTimeout(timerId);
+  };
+  
+  setTimeout(dismissTimer, 2000);*/
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
